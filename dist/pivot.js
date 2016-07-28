@@ -848,7 +848,13 @@
           if (x !== -1) {
             th = document.createElement("th");
             th.className = "pvtRowLabel";
-            th.textContent = txt;
+            textFormatter = pivotData.getAggregator([],[]) //gets the same default formatter used by the aggregator
+            if(!isNaN(txt)) {
+            	th.textContent = textFormatter.format(txt); //applies this formatter to the columns if they contain numerical data
+            }
+            else {
+							th.textContent = txt; //leave the formatter as it is if it does not contain numerical data
+            }
             th.setAttribute("rowspan", x);
             if (parseInt(j) === rowAttrs.length - 1 && colAttrs.length !== 0) {
               th.setAttribute("colspan", 2);
